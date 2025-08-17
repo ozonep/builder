@@ -4,17 +4,17 @@ on:
   workflow_dispatch:
     inputs:
       fake_build:
-        description: 'Fake build'
+        description: "Fake build"
         required: true
-        default: 'false'
+        default: "false"
         type: choice
         options:
-        - true
-        - false
+          - "true"
+          - "false"
       suffix:
-        description: 'TAG suffix'
+        description: "TAG suffix"
         required: false
-        default: ''
+        default: ""
         type: string
 
 env:
@@ -110,20 +110,7 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - kng_re
-          - r3d
-          - r3g
-          - r3p
-          - rb03
-          - rb06
-          - rd03
-          - rt-ax52
-          - rt-ax57m
           - rt-ax59u
-          - rt-ax89x
-          - tuf_ax4200
-          - tuf_ax6000
-          - zen-bt8
     steps:
       - name: Initialization environment
         env:
@@ -144,7 +131,7 @@ jobs:
           remove-haskell: true
           remove-codeql: true
           remove-docker-images: true
-        
+
       - name: Checkout builder
         uses: actions/checkout@main
 
@@ -154,7 +141,7 @@ jobs:
       - name: Init builder
         env:
           BLDROOT: ${{ github.workspace }}
-        shell: bash        
+        shell: bash
         run: |
           rsync -avq --exclude=".*" --exclude="$(basename $BUILD_ROOT)" $BLDROOT/ $BUILD_ROOT/
           cd $BUILD_ROOT
@@ -170,7 +157,7 @@ jobs:
       - name: Build the firmware image
         id: compile
         if: steps.update.outputs.status == 'success'
-        env: 
+        env:
           TARGET: ${{ matrix.target }}
           FW_VER: ${{ needs.check.outputs.fw_ver }}
         run: |
@@ -232,7 +219,7 @@ jobs:
         run: |
           tar -cJvf logs-$TARGET-$FW_DATE.tar.xz $LOGS_DIR
 
-      - name: Cleanup OUT directory 
+      - name: Cleanup OUT directory
         if: steps.compile.outputs.status == 'success'
         env:
           OUT_DIR: ${{ env.OUT_DIR }}
@@ -267,7 +254,7 @@ jobs:
           path: logs-*.tar.xz
 
   release:
-    needs: [ check, build ]
+    needs: [check, build]
     permissions:
       contents: write
     runs-on: ubuntu-24.04
@@ -293,7 +280,7 @@ jobs:
         with:
           prerelease: false
           tag_name: ${{ needs.check.outputs.tag }}
-          name: '${{ needs.check.outputs.tag }}'
+          name: "${{ needs.check.outputs.tag }}"
           body: |
             OpenWrt ${{ needs.check.outputs.fw_ver }} [${{ needs.check.outputs.fw_date }}]
             author: [remittor](https://github.com/remittor)
