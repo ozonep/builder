@@ -110,20 +110,7 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - kng_re
-          - r3d
-          - r3g
-          - r3p
-          - rb03
-          - rb06
-          - rd03
-          - rt-ax52
-          - rt-ax57m
           - rt-ax59u
-          - rt-ax89x
-          - tuf_ax4200
-          - tuf_ax6000
-          - zen-bt8
     steps:
       - name: Initialization environment
         env:
