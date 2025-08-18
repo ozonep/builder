@@ -152,10 +152,6 @@ fi
 
 if [ "$OPT_FULL_UPDATE" = "true" ]; then
 	if [ -f "$XDIR/vermagic_update.sh" ]; then
-		./vermagic_update.sh ipq806x generic
-		./vermagic_update.sh qualcommax ipq807x
-		./vermagic_update.sh ramips mt7621
-		./vermagic_update.sh mediatek mt7622
 		./vermagic_update.sh mediatek filogic
 	fi
 fi
