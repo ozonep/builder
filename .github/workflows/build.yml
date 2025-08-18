@@ -110,7 +110,7 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - rt-ax59u_initramfs
+          - rt-ax59u
     steps:
       - name: Initialization environment
         env:
