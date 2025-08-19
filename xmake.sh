@@ -147,23 +147,6 @@ function build_target {
 		sed -i 's/DROPBEAR_SHA1_HMAC,0/ /g' $DROPBEAR_MK
 	fi
 
-	# Purge duplicate feed packages when a GIT_PACKAGE provides a local copy
-ADDONSCFG="$XDIR/_addons.config"
-if [ -f "$ADDONSCFG" ]; then
-    pkg_lst=$( get_cfg_expkg_lst "$ADDONSCFG" )
-    for pkg in $pkg_lst; do
-        local_dir="$XDIR/package/addons/$pkg"
-        if [ -d "$local_dir" ]; then
-            # Remove any same-named packages coming from feeds
-            while IFS= read -r dupdir; do
-                [ -d "$dupdir" ] || continue
-                echo "Purging duplicate from feeds for package '$pkg': $dupdir"
-                rm -rf "$dupdir"
-            done < <(find "$XDIR/package/feeds" -maxdepth 2 -type d -name "$pkg" 2>/dev/null)
-        fi
-    done
-fi
-
 make defconfig
 
 	NSS_DRV_PPPOE_ENABLE=$( get_cfg_opt_flag $CFG NSS_DRV_PPPOE_ENABLE )
