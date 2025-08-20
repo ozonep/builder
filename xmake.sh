@@ -147,7 +147,7 @@ function build_target {
 		sed -i 's/DROPBEAR_SHA1_HMAC,0/ /g' $DROPBEAR_MK
 	fi
 
-    make defconfig
+	make defconfig
 
 	NSS_DRV_PPPOE_ENABLE=$( get_cfg_opt_flag $CFG NSS_DRV_PPPOE_ENABLE )
 	if [ "$NSS_DRV_PPPOE_ENABLE" = y ]; then
