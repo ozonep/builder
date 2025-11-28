@@ -1,7 +1,7 @@
 #!/bin/bash
 
 XSUPPORTEDVER=23
-XREPOADDR=https://github.com/ozonep/openwrt
+XREPOADDR=https://github.com/openwrt-xiaomi
 XDEFBRANCH=xq-23.05.0
 
 logmsg() {
