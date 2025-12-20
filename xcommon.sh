@@ -1,8 +1,8 @@
 #!/bin/bash
 
 XSUPPORTEDVER=23
-XREPOADDR=https://github.com/ozonep
-XDEFBRANCH=openwrt-24.10
+XREPOADDR=https://github.com/openwrt-xiaomi
+XDEFBRANCH=xq-24.10
 
 logmsg() {
 	echo "$@"
